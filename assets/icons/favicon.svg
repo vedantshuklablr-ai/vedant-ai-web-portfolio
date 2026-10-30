@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Vedant Shukla monogram">
+  <rect width="256" height="256" rx="48" fill="#0B0B0D"/>
+  <path d="M56 64h38v100c0 18-12 30-32 30H52v-30h10V94H56zm100 0h46v30h-46v20h40v29h-40v51h-34V64z" fill="#F4F2ED"/>
+  <path d="M56 222h144" stroke="#C6F36B" stroke-linecap="round" stroke-width="8"/>
+</svg>
