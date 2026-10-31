@@ -36,7 +36,7 @@ portfolio-site/
     ├── js/
     │   └── qrcode.js
     └── resume/
-        └── Vedant-Shukla-Resume.pdf (add this file)
+        └── Vedant-Shukla-Resume.pdf
 ```
 
 ## Run locally
@@ -57,13 +57,13 @@ py -m http.server 8000
 
 ## Résumé PDF and QR code
 
-The expected PDF is **not currently included**. Add the résumé you intend to publish at:
+The résumé PDF is included at:
 
 ```text
 assets/resume/Vedant-Shukla-Resume.pdf
 ```
 
-The PDF will be publicly downloadable after deployment. Confirm that you want to publish it before adding it to a public repository or static host.
+The PDF is publicly downloadable from the deployed site and public repository. Only publish a résumé you are comfortable making public.
 
 The page checks the PDF at the expected relative path using a same-origin `HEAD` request. It enables the PDF links only when the file is reachable as a non-empty PDF. It then generates a QR code locally using the bundled `qrcode-generator` library; no résumé URL is sent to a QR service. The QR destination is based on the current page URL, so it follows the actual deployed host and project path. On `file://`, QR generation is withheld because another device cannot reach a local file URL. The QR card never requests camera access.
 
@@ -73,41 +73,29 @@ If the file is missing, unreachable, or QR rendering fails, the card displays a 
 
 Public GitHub repositories are linked only when an exact matching repository was verified. The RoadRakshak repository link remains a TODO until its public URL is confirmed. The provided SKYGUARD demo URL had a hostname typo and returned 404; the corrected `https://vedantshuklablr-ai.github.io/SKYGUARD/` URL was verified.
 
-GitHub account: <https://github.com/vedantshuklablr-ai>. A repository for this portfolio has **not** been created yet.
+GitHub account: <https://github.com/vedantshuklablr-ai>.
+Portfolio repository: <https://github.com/vedantshuklablr-ai/vedant-ai-web-portfolio>.
 
 ## GitHub setup
 
-GitHub CLI authentication and Git are not available in the current environment. To create the requested new public repository:
+The public repository is `vedantshuklablr-ai/vedant-ai-web-portfolio`. The site and résumé PDF are pushed to its `main` branch.
 
-1. Install Git for Windows and sign in to GitHub.
-2. Create a **public** repository named `personal-portfolio-website` under the `vedantshuklablr-ai` account. Do not initialize it with a README or other files.
-3. Before adding the résumé PDF, decide whether you want that document to be publicly downloadable and committed to a public repository. The PDF is not currently in this project.
-4. In PowerShell, from the project folder, run:
+To push future changes, use PowerShell in the project folder:
 
 ```powershell
-git init
 git add .
 git commit -m "Build AI and web developer portfolio"
-git branch -M main
-git remote add origin https://github.com/vedantshuklablr-ai/personal-portfolio-website.git
 git push -u origin main
 ```
-
-The repository URL above is the requested destination; it has not been created or verified as an existing repository.
 
 ## Deploy
 
 ### GitHub Pages
 
-After pushing the new repository, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, and save. Wait for the Pages URL to become available. Verify that both the site and `assets/resume/Vedant-Shukla-Resume.pdf` load before sharing the résumé QR.
+To use GitHub Pages instead, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, and save. Verify that both the site and `assets/resume/Vedant-Shukla-Resume.pdf` load before sharing the résumé QR.
 
 ### Vercel
 
-No Vercel project has been created; Vercel authentication is not configured in the current environment. After pushing to GitHub:
+The Vercel project is connected to the public GitHub repository and deploys this static site from the repository root. Production URL: <https://portfolio-site-fawn-sigma.vercel.app>.
 
-1. Sign in at Vercel and import `vedantshuklablr-ai/personal-portfolio-website`.
-2. Choose the **Other** static preset, leave the build command empty, and use the repository root as the output directory.
-3. Deploy, then verify the production site and résumé PDF URL return successfully.
-4. Open the production `/` page and confirm the résumé card reports **Ready** only after the PDF and QR image have both loaded.
-
-There is no deployment-specific routing requirement, so a `vercel.json` is not needed.
+The production homepage and résumé PDF URL have been verified. Git pushes to `main` are connected to Vercel for deployment. There is no deployment-specific routing requirement, so a `vercel.json` is not needed.
