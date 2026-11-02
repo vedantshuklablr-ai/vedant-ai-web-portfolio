@@ -4,6 +4,13 @@ declare global {
   interface Window {
     qrcode?: (typeNumber: number, errorCorrectionLevel: string) => QRCode;
   }
+
+  interface Navigator {
+    connection?: {
+      saveData?: boolean;
+      effectiveType?: string;
+    };
+  }
 }
 
 interface QRCode {
@@ -585,6 +592,72 @@ async function initResumeCard() {
   });
 }
 
+function initHeroIntroVideo() {
+  const hero = getElement<HTMLElement>('hero');
+  const video = getElement<HTMLVideoElement>('heroIntroVideo');
+  const poster = getElement<HTMLImageElement>('heroIntroPoster');
+  const card = video.closest<HTMLElement>('.hero-video-card');
+  if (!card) throw new Error('The hero introduction video card is missing.');
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let heroIsVisible = false;
+  let videoSourceLoaded = false;
+
+  const shouldUsePoster = () => {
+    const connection = navigator.connection;
+    return reducedMotion.matches
+      || window.matchMedia('(max-width: 860px)').matches
+      || connection?.saveData === true
+      || connection?.effectiveType === 'slow-2g'
+      || connection?.effectiveType === '2g'
+      || connection?.effectiveType === '3g';
+  };
+
+  const startVideo = () => {
+    if (!heroIsVisible || shouldUsePoster()) return;
+
+    if (!videoSourceLoaded) {
+      const source = video.dataset.src;
+      if (!source) throw new Error('The hero introduction video source is missing.');
+      video.src = source;
+      video.load();
+      videoSourceLoaded = true;
+    }
+
+    void video.play().catch(() => {
+      // Keep the poster visible if the browser blocks autoplay.
+    });
+  };
+
+  const updatePlaybackPreference = () => {
+    if (shouldUsePoster()) {
+      video.pause();
+      card.classList.remove('is-playing');
+      poster.hidden = false;
+      return;
+    }
+    startVideo();
+  };
+
+  video.addEventListener('playing', () => {
+    poster.hidden = true;
+    card.classList.add('is-playing');
+  });
+  reducedMotion.addEventListener('change', updatePlaybackPreference);
+  window.addEventListener('resize', updatePlaybackPreference, { passive: true });
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      heroIsVisible = true;
+      observer.disconnect();
+      startVideo();
+    });
+    observer.observe(hero);
+  }
+}
+
+initHeroIntroVideo();
 initResumeCard();
 
 if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {

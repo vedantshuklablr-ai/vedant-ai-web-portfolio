@@ -92,7 +92,7 @@
 <main id="main">
 
   <!-- 1. HERO -->
-  <section class="hero" aria-label="Introduction">
+  <section class="hero" id="hero" aria-label="Introduction">
     <div class="wrap hero-layout">
       <div class="hero-inner">
       <p class="eyebrow reveal">B.TECH COMPUTER SCIENCE STUDENT <span aria-hidden="true">&middot;</span> AI &amp; WEB DEVELOPER</p>
@@ -116,8 +116,9 @@
         </a>
       </nav>
       </div>
-      <figure class="hero-visual reveal reveal-d2">
-        <img src="assets/images/og-image.png" alt="Portfolio cover graphic for Vedant Shukla, Aerospace, AI and Web Developer" width="1200" height="630" fetchpriority="high">
+      <figure class="hero-visual hero-video-card reveal reveal-d2" aria-label="Short introduction video">
+        <img class="hero-video-poster" id="heroIntroPoster" src="assets/video/intro-clip-poster.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+        <video class="hero-video" id="heroIntroVideo" muted autoplay loop playsinline preload="none" poster="assets/video/intro-clip-poster.jpg" data-src="assets/video/intro-clip.mp4" aria-hidden="true"></video>
       </figure>
     </div>
     <div class="wrap">
@@ -147,7 +148,10 @@
   <!-- 2. ABOUT -->
   <section id="about" class="section" aria-labelledby="about-h">
     <div class="wrap about-grid">
-      <div>
+      <figure class="about-photo">
+        <img src="assets/images/profile-photo-card.jpg" alt="Portrait of Vedant Shukla" width="800" height="1000" loading="lazy" decoding="async">
+      </figure>
+      <div class="about-copy">
         <h2 id="about-h">About</h2>
         <p class="lead">B.Tech Computer Science Engineering student at Dayananda Sagar University focused on software development, analytical problem-solving, and the digital economy. Builds voice-enabled intelligent applications and automation systems while exploring artificial intelligence, cybersecurity, data science, web development, and aerospace technology.</p>
         <p class="lead">Interests include aerospace and defence technology concepts, AI automation and voice systems, software engineering, web and app development, cybersecurity and CTFs, data analytics, machine learning, 3D visualization, and hackathons.</p>

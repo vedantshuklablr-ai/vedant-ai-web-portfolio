@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vedant-portfolio-v4';
+const CACHE_NAME = 'vedant-portfolio-v5';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -6,6 +6,8 @@ const CORE_ASSETS = [
   './dist/script.js',
   './assets/js/qrcode.js',
   './assets/images/og-image.png',
+  './assets/images/profile-photo-card.jpg',
+  './assets/video/intro-clip-poster.jpg',
   './assets/icons/favicon.svg',
   './assets/icons/favicon.png',
   './assets/icons/favicon-32.png',

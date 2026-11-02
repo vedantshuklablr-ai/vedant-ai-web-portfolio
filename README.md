@@ -7,7 +7,8 @@ A responsive static portfolio for Vedant Shukla, a B.Tech Computer Science Engin
 - Semantic HTML5 and responsive CSS
 - TypeScript source compiled to browser-native JavaScript
 - Self-hosted `qrcode-generator` at `assets/js/qrcode.js`; no QR API or résumé data leaves the site
-- A versioned service worker caches the static site and résumé for repeat/offline access
+- A versioned service worker caches the static site, portrait, video poster, and résumé for repeat/offline access
+- The About section uses the portrait crop; the hero video loads only when visible on desktop and stays a static poster on mobile, reduced-motion, data-saving, or slow connections
 - No React, runtime framework, backend, runtime build, or deploy-time build command
 - Three.js is not loaded: no genuine `.glb`/`.gltf` model is present. AETHER-01 is shown as in development without fabricated imagery or specifications.
 
@@ -34,8 +35,13 @@ portfolio-site/
 ├── assets/
 │   ├── icons/
 │   ├── images/
+│   │   ├── profile-photo.jpg
+│   │   └── profile-photo-card.jpg
 │   ├── js/
 │   │   └── qrcode.js
+│   ├── video/
+│   │   ├── intro-clip.mp4
+│   │   └── intro-clip-poster.jpg
 │   └── resume/
 │       └── Vedant-Shukla-Resume.pdf
 ├── manifest.json
@@ -68,7 +74,7 @@ Open `http://localhost:8000`. The browser loads the committed `dist/script.js`; 
 
 Place the PDF at `assets/resume/Vedant-Shukla-Resume.pdf`. The page verifies that the same-origin PDF is reachable before enabling résumé actions, then generates a QR code locally from the URL derived at runtime from `window.location`. The QR can be downloaded as SVG. On `file://`, the shareable QR is withheld because a local file URL cannot be reached from another device.
 
-The service worker precaches the HTML, CSS, compiled JavaScript, QR library, icons, manifest, cover image, and résumé PDF. The initial visit and cache installation need a network connection; later visits can use the cached content offline. Bump `CACHE_NAME` in `service-worker.js` when changing the precache set so old caches are replaced.
+The service worker precaches the HTML, CSS, compiled JavaScript, QR library, icons, portrait crop, video poster, manifest, cover image, and résumé PDF. It does not precache the 4 MB introduction video. The video loads only when the hero is visible and only on desktop when reduced motion and data-saving preferences allow it; it stays static on slow (3G or lower) connections. The initial visit and cache installation need a network connection; later visits can use the cached content offline. Bump `CACHE_NAME` in `service-worker.js` when changing the precache set so old caches are replaced.
 
 The résumé is a public static file in this repository. Only publish or deploy it if you are comfortable making it publicly downloadable.
 
