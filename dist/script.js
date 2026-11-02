@@ -5,23 +5,42 @@ const SOCIAL_LINKS = [
     { name: 'LinkedIn', url: 'https://linkedin.com/in/vedant-shukla-7735a7313/', icon: 'linkedin' },
     { name: 'GitHub', url: 'https://github.com/vedantshuklablr-ai', icon: 'github' }
 ];
+const TECH_LOGOS = {
+    c: { name: 'C', url: 'https://en.cppreference.com/w/c/language', src: 'assets/icons/tech/c.svg' },
+    cpp: { name: 'C++', url: 'https://en.cppreference.com/w/cpp', src: 'assets/icons/tech/cplusplus.svg' },
+    java: { name: 'Java', url: 'https://dev.java/', src: 'assets/icons/tech/java.svg' },
+    python: { name: 'Python', url: 'https://www.python.org/', src: 'assets/icons/tech/python.svg' },
+    javascript: { name: 'JavaScript', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', src: 'assets/icons/tech/javascript.svg' },
+    typescript: { name: 'TypeScript', url: 'https://www.typescriptlang.org/', src: 'assets/icons/tech/typescript.svg' },
+    html5: { name: 'HTML5', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML', src: 'assets/icons/tech/html5.svg' },
+    css3: { name: 'CSS3', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS', src: 'assets/icons/tech/css3.svg' },
+    nodejs: { name: 'Node.js', url: 'https://nodejs.org/', src: 'assets/icons/tech/nodejs.svg' },
+    express: { name: 'Express', url: 'https://expressjs.com/', src: 'assets/icons/tech/express.svg', tileClass: 'tech-logo-light' },
+    blender: { name: 'Blender', url: 'https://www.blender.org/', src: 'assets/icons/tech/blender.svg' },
+    vscode: { name: 'VS Code', url: 'https://code.visualstudio.com/', src: 'assets/icons/tech/vscode.svg' },
+    github: { name: 'GitHub', url: 'https://github.com/vedantshuklablr-ai', src: 'assets/icons/tech/github.svg', tileClass: 'tech-logo-light' },
+    autocad: { name: 'AutoCAD', url: 'https://www.autodesk.com/products/autocad/overview', src: 'assets/icons/tech/autodesk.svg' },
+    excel: { name: 'Excel', url: 'https://www.microsoft.com/microsoft-365/excel', src: 'assets/icons/tech/excel.svg' },
+    powerpoint: { name: 'PowerPoint', url: 'https://www.microsoft.com/microsoft-365/powerpoint', src: 'assets/icons/tech/powerpoint.svg' },
+    word: { name: 'Word', url: 'https://www.microsoft.com/microsoft-365/word', src: 'assets/icons/tech/word.svg' }
+};
 const SOCIAL_ICON_PATHS = {
     x: 'M18.901 1.153h3.68L14.54 10.02l9.45 12.827h-7.406l-5.8-7.584-6.64 7.584H.46l8.6-9.83L0 1.154h7.594l5.243 6.932zm-1.293 19.43h2.039L6.486 3.278H4.298z',
     linkedin: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.35V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.119 20.452H3.555V9h3.564z',
     github: 'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.043-1.61-4.043-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.304-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 6.006 0c2.29-1.552 3.297-1.23 3.297-1.23.655 1.652.243 2.873.12 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.805 5.623-5.475 5.921.43.372.815 1.103.815 2.222 0 1.605-.015 2.898-.015 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.597 24 12.297c0-6.627-5.373-12-12-12'
 };
 const SKILLS = [
-    { cat: "Languages", items: "C, C++, Java, Python, JavaScript, TypeScript" },
-    { cat: "Web", items: "HTML5, CSS3, JavaScript, Node.js, Express" },
+    { cat: "Languages", items: "C, C++, Java, Python, JavaScript, TypeScript", logos: [TECH_LOGOS.c, TECH_LOGOS.cpp, TECH_LOGOS.java, TECH_LOGOS.python, TECH_LOGOS.javascript, TECH_LOGOS.typescript] },
+    { cat: "Web", items: "HTML5, CSS3, JavaScript, Node.js, Express", logos: [TECH_LOGOS.html5, TECH_LOGOS.css3, TECH_LOGOS.javascript, TECH_LOGOS.nodejs, TECH_LOGOS.express] },
     { cat: "Databases", items: "SQL" },
-    { cat: "3D / Visualization", items: "Blender, 3D modelling, 3D visualization, aerospace concept modelling" },
+    { cat: "3D / Visualization", items: "Blender, 3D modelling, 3D visualization, aerospace concept modelling", logos: [TECH_LOGOS.blender] },
     { cat: "AI / Automation", items: "AI Automation & Voice Systems, Artificial Intelligence, Machine Learning, AI-assisted development" },
     { cat: "Cybersecurity / Analytics", items: "Cybersecurity, CTFs, Data Analytics, Data Science" }
 ];
 const TOOLS = [
-    { name: "VS Code • GitHub", use: "Developer tools" },
-    { name: "AutoCAD", use: "Design tool" },
-    { name: "Excel • PowerPoint • Word", use: "Productivity tools" }
+    { name: "VS Code • GitHub", use: "Developer tools", logos: [TECH_LOGOS.vscode, TECH_LOGOS.github] },
+    { name: "AutoCAD", use: "Design tool", logos: [TECH_LOGOS.autocad] },
+    { name: "Excel • PowerPoint • Word", use: "Productivity tools", logos: [TECH_LOGOS.excel, TECH_LOGOS.powerpoint, TECH_LOGOS.word] }
 ];
 const PROJECTS = [
     {
@@ -190,8 +209,19 @@ function renderSkills() {
     el.innerHTML = SKILLS.map(skill => `
     <div class="skill-row tilt-card">
       <div class="cat">${escapeHtml(skill.cat)}</div>
-      <div class="items">${escapeHtml(skill.items)}</div>
+      <div class="skill-content">
+        <div class="items">${escapeHtml(skill.items)}</div>
+        ${skill.logos ? renderTechLogos(skill.logos) : ''}
+      </div>
     </div>`).join('');
+}
+function renderTechLogos(logos) {
+    return `<div class="tech-logo-list">
+    ${logos.map(logo => `<a class="tech-logo-link${logo.tileClass ? ` ${logo.tileClass}` : ''}" href="${escapeHtml(logo.url)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${logo.name} official website`)}" title="${escapeHtml(logo.name)}">
+      <img src="${escapeHtml(logo.src)}" alt="" width="40" height="40" loading="lazy" decoding="async">
+      <span class="tech-logo-tooltip" aria-hidden="true">${escapeHtml(logo.name)}</span>
+    </a>`).join('')}
+  </div>`;
 }
 function renderSocialLinks() {
     const markup = SOCIAL_LINKS.map(({ name, url, icon }) => `
@@ -210,6 +240,7 @@ function renderTools() {
     el.innerHTML = TOOLS.map(tool => `
     <article class="tool-card tilt-card">
       <span class="tool-use">${escapeHtml(tool.use)}</span>
+      ${renderTechLogos(tool.logos)}
       <span class="tool-name">${escapeHtml(tool.name)}</span>
     </article>`).join('');
 }
