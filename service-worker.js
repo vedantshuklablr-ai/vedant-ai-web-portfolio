@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vedant-portfolio-v5';
+const CACHE_NAME = 'vedant-portfolio-v6';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -38,7 +38,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const request = event.request;
   const requestUrl = new URL(request.url);
-  if (requestUrl.origin !== self.location.origin) return;
+  if (requestUrl.origin !== self.location.origin
+    || requestUrl.pathname === '/assets/video/intro-clip.mp4') return;
 
   event.respondWith((async () => {
     const cacheRequest = request.method === 'HEAD'
