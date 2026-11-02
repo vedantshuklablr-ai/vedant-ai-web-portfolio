@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vedant-portfolio-v10';
+const CACHE_NAME = 'vedant-portfolio-v11';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -7,6 +7,8 @@ const CORE_ASSETS = [
   './assets/js/qrcode.js',
   './assets/images/og-image.png',
   './assets/images/profile-photo-card.jpg',
+  './assets/images/java007-channel-avatar.jpg',
+  './assets/images/goat-esports-logo.svg',
   './assets/video/intro-clip-poster.jpg',
   './assets/icons/favicon.svg',
   './assets/icons/favicon.png',

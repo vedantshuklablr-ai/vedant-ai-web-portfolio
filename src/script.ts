@@ -32,9 +32,30 @@ type Project = {
   link?: string;
   demo?: string;
 };
-type TrackEntry = { role: string; org: string; date: string; desc: string; link?: string; linkLabel?: string };
+type TrackEntry = {
+  role: string;
+  org: string;
+  date: string;
+  desc: string;
+  link?: string;
+  linkLabel?: string;
+  duration?: string;
+  logo?: string;
+  logoAlt?: string;
+  logoLayout?: 'square' | 'wide';
+  location?: string;
+  workArrangement?: string;
+};
 type EventCard = { name: string; detail: string };
 type SocialLink = { name: string; url: string; icon: 'x' | 'linkedin' | 'github' };
+type Venture = {
+  name: string;
+  icon: 'store' | 'affiliate' | 'video';
+  description: string;
+  status: string;
+  focusAreas: readonly string[];
+  businessModel?: string;
+};
 
 const CONTACT_EMAIL = "vedantshuklablr@gmail.com";
 const RESUME_PATH = "assets/resume/Vedant-Shukla-Resume.pdf";
@@ -138,18 +159,58 @@ const TRACK: TrackEntry[] = [
     role: "Founder & Content Creator",
     org: "Java 007 YouTube Channel",
     date: "Apr 2024 – Jan 2026",
-    desc: "Produced and published eSports and gaming content, including Free Fire and BGMI.",
-    link: "https://youtube.com/@vedant_shukla007?si=Y3tyqGtemUBXXCxx"
+    desc: "Produced and published eSports and gaming content covering Free Fire, BGMI, and other games.",
+    link: "https://youtube.com/@vedant_shukla007?si=Y3tyqGtemUBXXCxx",
+    linkLabel: "Visit YouTube channel",
+    logo: "assets/images/java007-channel-avatar.jpg",
+    logoAlt: "JAVA007 YouTube channel logo"
   },
   {
     role: "Founder & In-Game Leader (IGL)",
     org: "GOAT Esports Organisation",
     date: "Apr 2019 – Dec 2025",
-    desc: "Bengaluru, India · Hybrid. Founded and led a competitive Indian eSports organisation managing five active rosters; owned team strategy, player roles, communication, roster planning, and decision-making under pressure.",
+    desc: "Founded and led a competitive Indian eSports organisation managing five active rosters; led team strategy, player roles, communication, roster planning, organisational leadership, performance management, and competitive coordination.",
     link: "https://goat-esports.vercel.app/",
-    linkLabel: "GOAT ESPORTS website"
+    linkLabel: "Visit GOAT Esports website",
+    duration: "6 years 9 months",
+    logo: "assets/images/goat-esports-logo.svg",
+    logoAlt: "GOAT Esports official logo",
+    logoLayout: "wide",
+    location: "Bengaluru, India",
+    workArrangement: "Hybrid"
   }
 ];
+
+const VENTURES: readonly Venture[] = [
+  {
+    name: "DROPSHIPPING & E-COMMERCE VENTURE",
+    icon: "store",
+    description: "Developing an e-commerce business concept focused on product research, digital storefront development, supplier exploration, and understanding the Indian e-commerce market.",
+    status: "UNDER CONSTRUCTION — IN DEVELOPMENT",
+    businessModel: "Dropshipping + Affiliate Marketing",
+    focusAreas: ["Indian e-commerce", "Product research", "Supplier research", "Store development", "Digital storefront design", "Customer experience", "Business operations", "Brand building"]
+  },
+  {
+    name: "AFFILIATE MARKETING INITIATIVE",
+    icon: "affiliate",
+    description: "Exploring affiliate marketing strategies, product discovery, content distribution, digital platforms, and performance-based online business models.",
+    status: "UNDER CONSTRUCTION — RESEARCH & DEVELOPMENT",
+    focusAreas: ["Affiliate platform research", "Product discovery", "Content marketing", "Digital distribution", "Link management", "Audience research", "Conversion analysis", "Marketing strategy"]
+  },
+  {
+    name: "VIDEO PRODUCTION & CREATIVE MEDIA AGENCY",
+    icon: "video",
+    description: "Developing a future creative media venture focused on professional video production, editing, content creation, visual storytelling, and digital media services.",
+    status: "UNDER CONSTRUCTION — BUILDING THE CREATIVE AGENCY",
+    focusAreas: ["Video editing", "Video production", "Content creation", "Creative direction", "Brand storytelling", "Social-media content", "Digital marketing creatives", "Motion graphics", "Post-production", "Visual communication"]
+  }
+];
+
+const VENTURE_ICON_PATHS: Record<Venture['icon'], readonly string[]> = {
+  store: ['M3 9h18l-1.5-6h-15L3 9Z', 'M5 9v12h14V9', 'M9 21v-7h6v7', 'M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0'],
+  affiliate: ['M7 7h3v3H7z', 'M14 14h3v3h-3z', 'M15.5 4.5h3v3h-3z', 'M10 8.5h3a3 3 0 0 1 3 3V14', 'M7 10v4a3 3 0 0 0 3 3h4', 'M12 5h3.5'],
+  video: ['M3 6h13a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z', 'm18 10 5-3v10l-5-3z', 'm8 10 4 2-4 2z']
+};
 
 const EDUCATION: TrackEntry[] = [
   {
@@ -269,14 +330,42 @@ function renderEntries(targetId: string, entries: readonly TrackEntry[]) {
   el.innerHTML = entries.map(entry => `
     <div class="track-item">
       <div class="track-top">
-        <div>
+        <div class="track-identity">
+          ${entry.logo && entry.link ? `<a class="track-logo-link${entry.logoLayout === 'wide' ? ' track-logo-wide' : ''}" href="${escapeHtml(entry.link)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`Visit ${entry.org}`)}"><img class="track-logo" src="${escapeHtml(entry.logo)}" alt="${escapeHtml(entry.logoAlt ?? '')}" loading="lazy" decoding="async"></a>` : ''}
+          <div class="track-heading">
           <div class="track-role">${escapeHtml(entry.role)}</div>
-          <div class="track-org">${escapeHtml(entry.org)}${entry.link ? ` · <a href="${escapeHtml(entry.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(entry.linkLabel ?? 'YouTube channel')} ↗</a>` : ''}</div>
+          <div class="track-org">${entry.link ? `<a class="track-org-link" href="${escapeHtml(entry.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(entry.org)}</a>` : escapeHtml(entry.org)}</div>
+          </div>
         </div>
-        <div class="track-date">${escapeHtml(entry.date)}</div>
+        <div class="track-dates">
+          <div class="track-date">${escapeHtml(entry.date)}</div>
+          ${entry.duration ? `<div class="track-duration">${escapeHtml(entry.duration)}</div>` : ''}
+        </div>
       </div>
+      ${entry.location || entry.workArrangement ? `<p class="track-location">${[entry.location, entry.workArrangement].filter((value): value is string => value !== undefined).map(escapeHtml).join(' · ')}</p>` : ''}
       <p class="track-desc">${escapeHtml(entry.desc)}</p>
+      ${entry.link && entry.linkLabel ? `<a class="track-visit-link" href="${escapeHtml(entry.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(entry.linkLabel)} ↗</a>` : ''}
     </div>`).join('');
+}
+
+function renderVentures() {
+  const el = getElement<HTMLDivElement>('ventureList');
+  el.innerHTML = VENTURES.map(venture => `
+    <article class="venture-card">
+      <div class="venture-card-top">
+        <span class="venture-icon venture-icon-${venture.icon}" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">${VENTURE_ICON_PATHS[venture.icon].map(path => `<path d="${path}"></path>`).join('')}</svg>
+        </span>
+        <span class="venture-status-badge">UNDER CONSTRUCTION</span>
+      </div>
+      <h4 class="venture-name">${escapeHtml(venture.name)}</h4>
+      <p class="venture-desc">${escapeHtml(venture.description)}</p>
+      ${venture.businessModel ? `<p class="venture-model"><strong>Business model:</strong> ${escapeHtml(venture.businessModel)}</p>` : ''}
+      <p class="venture-status">${escapeHtml(venture.status)}</p>
+      <ul class="venture-focus" aria-label="${escapeHtml(`${venture.name} focus areas`)}">
+        ${venture.focusAreas.map(area => `<li>${escapeHtml(area)}</li>`).join('')}
+      </ul>
+    </article>`).join('');
 }
 
 function renderCards(targetId: string, entries: readonly EventCard[]) {
@@ -293,6 +382,7 @@ renderSocialLinks();
 renderTools();
 renderProjects();
 renderEntries('trackList', TRACK);
+renderVentures();
 renderEntries('educationList', EDUCATION);
 renderCards('hackathonList', HACKATHONS);
 renderCards('certificationList', CERTIFICATIONS);

@@ -17,7 +17,7 @@ A responsive static portfolio for Vedant Shukla, a B.Tech Computer Science Engin
 - Aerospace-blue design system, reduced-motion support, responsive mobile navigation, and keyboard focus states
 - Projects and keyboard-accessible case-study dialog, with links shown only for checked repositories and the working SKYGUARD demo
 - Aerospace Lab clearly labeled as personal, concept-stage work
-- Experience, education, events, skills, tools, and six selected certifications
+- Leadership timeline with linked Java 007 and GOAT Esports brand assets, plus three explicitly under-construction entrepreneurial initiatives; education, events, skills, tools, and six selected certifications
 - Resume QR generated locally from the current site URL after the PDF is verified; Download, Open, Copy Link, and QR-as-SVG actions
 - Contact form validates fields and opens a prepared `mailto:` draft; it does not send or store messages
 - Person JSON-LD, Open Graph/Twitter metadata, and a web app manifest
@@ -37,6 +37,8 @@ portfolio-site/
 │   ├── images/
 │   │   ├── profile-photo.jpg
 │   │   └── profile-photo-card.jpg
+│   │   ├── java007-channel-avatar.jpg
+│   │   └── goat-esports-logo.svg
 │   ├── js/
 │   │   └── qrcode.js
 │   ├── video/
