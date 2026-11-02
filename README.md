@@ -1,21 +1,25 @@
-# VEDANT SHUKLA — AI & WEB DEVELOPER PORTFOLIO
+# VEDANT SHUKLA — AEROSPACE, AI & TECHNOLOGY PORTFOLIO
 
-A responsive portfolio for Vedant Shukla featuring AI and web development projects, technical skills, leadership experience, education, hackathon participation, certifications, contact details, and a public résumé QR card. Built with static HTML, CSS, and vanilla JavaScript; there is no build step or backend.
+A responsive static portfolio for Vedant Shukla, a B.Tech Computer Science Engineering student exploring AI, software engineering, automation, aerospace technology concepts, and 3D visualization. It includes project case studies, experience, education, events, certifications, a client-side résumé QR card, and an installable offline-capable experience.
 
-## Tech stack
+## Technology
 
-- HTML5, CSS3, and browser-native JavaScript
-- `qrcode-generator` 2.0.4, bundled locally at `assets/js/qrcode.js` (MIT license notice is in the source header)
-- No package installation is required to run the site
+- Semantic HTML5 and responsive CSS
+- TypeScript source compiled to browser-native JavaScript
+- Self-hosted `qrcode-generator` at `assets/js/qrcode.js`; no QR API or résumé data leaves the site
+- A versioned service worker caches the static site and résumé for repeat/offline access
+- No React, runtime framework, backend, runtime build, or deploy-time build command
+- Three.js is not loaded: no genuine `.glb`/`.gltf` model is present. AETHER-01 is shown as in development without fabricated imagery or specifications.
 
 ## Features
 
-- Responsive cinematic-dark layout with mobile navigation and reduced-motion support
-- Project details dialog with verified GitHub repository links and the verified SKYGUARD demo
-- Education, leadership and experience, hackathons, and certifications
-- Résumé QR card that only reports **Ready** after verifying the PDF response and rendering the QR image
-- Download, open, and copy-link actions enabled only after the PDF is verified
-- Contact form validates required fields and opens a prepared email draft; the website does not send or store submissions
+- Aerospace-blue design system, reduced-motion support, responsive mobile navigation, and keyboard focus states
+- Projects and keyboard-accessible case-study dialog, with links shown only for checked repositories and the working SKYGUARD demo
+- Aerospace Lab clearly labeled as personal, concept-stage work
+- Experience, education, events, skills, tools, and six selected certifications
+- Resume QR generated locally from the current site URL after the PDF is verified; Download, Open, Copy Link, and QR-as-SVG actions
+- Contact form validates fields and opens a prepared `mailto:` draft; it does not send or store messages
+- Person JSON-LD, Open Graph/Twitter metadata, and a web app manifest
 
 ## Project structure
 
@@ -23,79 +27,60 @@ A responsive portfolio for Vedant Shukla featuring AI and web development projec
 portfolio-site/
 ├── index.html
 ├── style.css
-├── script.js
-├── README.md
-└── assets/
-    ├── icons/
-    │   ├── favicon.svg
-    │   ├── favicon.png
-    │   └── favicon-32.png
-    ├── images/
-    │   ├── og-image.png
-    │   └── project-thumb-placeholder.jpg
-    ├── js/
-    │   └── qrcode.js
-    └── resume/
-        └── Vedant-Shukla-Resume.pdf
+├── src/
+│   └── script.ts
+├── dist/
+│   └── script.js          # Compiled output; committed and loaded by index.html
+├── assets/
+│   ├── icons/
+│   ├── images/
+│   ├── js/
+│   │   └── qrcode.js
+│   └── resume/
+│       └── Vedant-Shukla-Resume.pdf
+├── manifest.json
+├── service-worker.js
+├── package.json
+├── package-lock.json
+└── tsconfig.json
 ```
 
-## Run locally
+`assets/images/project-thumb-placeholder.jpg` is retained from the existing site but is not used as a project image.
 
-With Node.js installed, open PowerShell in this project folder and run:
+## Local development
+
+Install the TypeScript compiler and compile the source:
 
 ```powershell
-Set-Location "C:\path\to\portfolio-site"
+npm install
+npm run build
+```
+
+Serve the project root over HTTP (needed for the résumé check and service worker). For example, with `npx`:
+
+```powershell
 npx --yes serve . --listen 8000
 ```
 
-Then open `http://localhost:8000`. Stop the server with `Ctrl+C`. Alternatively, if Python is installed:
+Open `http://localhost:8000`. The browser loads the committed `dist/script.js`; it never loads TypeScript directly. Re-run `npm run build` after source changes and commit the updated `dist/script.js`. This is a local development step only—Vercel should serve the already-compiled static files with no build command.
 
-```powershell
-Set-Location "C:\path\to\portfolio-site"
-py -m http.server 8000
-```
+## Résumé QR and offline behavior
 
-## Résumé PDF and QR code
+Place the PDF at `assets/resume/Vedant-Shukla-Resume.pdf`. The page verifies that the same-origin PDF is reachable before enabling résumé actions, then generates a QR code locally from the URL derived at runtime from `window.location`. The QR can be downloaded as SVG. On `file://`, the shareable QR is withheld because a local file URL cannot be reached from another device.
 
-The résumé PDF is included at:
+The service worker precaches the HTML, CSS, compiled JavaScript, QR library, icons, manifest, cover image, and résumé PDF. The initial visit and cache installation need a network connection; later visits can use the cached content offline. Bump `CACHE_NAME` in `service-worker.js` when changing the precache set so old caches are replaced.
 
-```text
-assets/resume/Vedant-Shukla-Resume.pdf
-```
+The résumé is a public static file in this repository. Only publish or deploy it if you are comfortable making it publicly downloadable.
 
-The PDF is publicly downloadable from the deployed site and public repository. Only publish a résumé you are comfortable making public.
+## Verified project links and TODOs
 
-The page checks the PDF at the expected relative path using a same-origin `HEAD` request. It enables the PDF links only when the file is reachable as a non-empty PDF. It then generates a QR code locally using the bundled `qrcode-generator` library; no résumé URL is sent to a QR service. The QR destination is based on the current page URL, so it follows the actual deployed host and project path. On `file://`, QR generation is withheld because another device cannot reach a local file URL. The QR card never requests camera access.
+- GitHub account: <https://github.com/vedantshuklablr-ai>
+- Existing portfolio repository: <https://github.com/vedantshuklablr-ai/vedant-ai-web-portfolio>
+- The SKYGUARD demo is <https://vedantshuklablr-ai.github.io/SKYGUARD/>. The hostname variant `vedantshuklablrai.github.io` does not resolve.
+- RoadRakshak has no repository link until its exact public URL is confirmed.
+- AETHER-01 has no model or preview asset in this repository. Add a real `.glb`/`.gltf` model or render before considering an interactive 3D preview.
+- VASTAV AI, a distinct AI Voice Chatbot, and an esports website are not listed as featured projects because their implemented scope/assets could not be confirmed.
 
-If the file is missing, unreachable, or QR rendering fails, the card displays a clear message instead of a false **Ready** state. Keep the résumé in the site root’s `assets/resume/` folder so static hosting serves it at the expected location.
+## Deployment
 
-## Project links
-
-Public GitHub repositories are linked only when an exact matching repository was verified. The RoadRakshak repository link remains a TODO until its public URL is confirmed. The provided SKYGUARD demo URL had a hostname typo and returned 404; the corrected `https://vedantshuklablr-ai.github.io/SKYGUARD/` URL was verified.
-
-GitHub account: <https://github.com/vedantshuklablr-ai>.
-Portfolio repository: <https://github.com/vedantshuklablr-ai/vedant-ai-web-portfolio>.
-
-## GitHub setup
-
-The public repository is `vedantshuklablr-ai/vedant-ai-web-portfolio`. The site and résumé PDF are pushed to its `main` branch.
-
-To push future changes, use PowerShell in the project folder:
-
-```powershell
-git add .
-git commit -m "Build AI and web developer portfolio"
-git push -u origin main
-```
-
-## Deploy
-
-### GitHub Pages
-
-To use GitHub Pages instead, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, and save. Verify that both the site and `assets/resume/Vedant-Shukla-Resume.pdf` load before sharing the résumé QR.
-
-### Vercel
-
-The Vercel project is connected to the public GitHub repository and deploys this static site from the repository root. Production URL: <https://portfolio-site-fawn-sigma.vercel.app>.
-
-The production homepage and résumé PDF URL have been verified. Git pushes to `main` are connected to Vercel for deployment. There is no deployment-specific routing requirement, so a `vercel.json` is not needed.
+The site is static. For Vercel, use the repository root as the project root, choose the **Other** framework preset, and leave the build command empty. Deploy only after the committed `dist/script.js` is up to date. Verify the homepage and `assets/resume/Vedant-Shukla-Resume.pdf` on the production URL before sharing the generated QR code.

@@ -1,103 +1,136 @@
+export {};
+
+declare global {
+  interface Window {
+    qrcode?: (typeNumber: number, errorCorrectionLevel: string) => QRCode;
+  }
+}
+
+interface QRCode {
+  addData(value: string): void;
+  make(): void;
+  createDataURL(cellSize: number, margin: number): string;
+  createSvgTag(cellSize: number, margin: number, alt?: string, title?: string): string;
+}
+
+type Skill = { cat: string; items: string };
+type Tool = { name: string; use: string };
+type Project = {
+  num: string;
+  title: string;
+  tag: string;
+  desc: string;
+  notes: string;
+  tools: string;
+  link?: string;
+  demo?: string;
+};
+type TrackEntry = { role: string; org: string; date: string; desc: string };
+type EventCard = { name: string; detail: string };
+
 const CONTACT_EMAIL = "vedantshuklablr@gmail.com";
 const RESUME_PATH = "assets/resume/Vedant-Shukla-Resume.pdf";
-const PROJECT_THUMB = "assets/images/project-thumb-placeholder.jpg";
 
-const SKILLS = [
-  { cat: "Languages & Frameworks", items: "HTML5, CSS3, JavaScript, TypeScript, Node.js, Express, Python, C, C++" },
-  { cat: "Tools & Platforms", items: "GitHub, VS Code, AutoCAD, Microsoft Excel, Microsoft PowerPoint, Microsoft Word" },
-  { cat: "Core Specializations", items: "AI Automation & Voice Systems, Software Development, Cybersecurity & CTFs, Data Analytics, Data Science, Machine Learning, Artificial Intelligence" },
-  { cat: "Learning Platforms", items: "LeetCode, HackerRank, Microsoft Learn, Kaggle, Devfolio, Unstop" }
+const SKILLS: Skill[] = [
+  { cat: "Languages", items: "C, C++, Java, Python, JavaScript, TypeScript" },
+  { cat: "Web", items: "HTML5, CSS3, JavaScript, Node.js, Express" },
+  { cat: "Databases", items: "SQL" },
+  { cat: "3D / Visualization", items: "Blender, 3D modelling, 3D visualization, aerospace concept modelling" },
+  { cat: "AI / Automation", items: "AI Automation & Voice Systems, Artificial Intelligence, Machine Learning, AI-assisted development" },
+  { cat: "Cybersecurity / Analytics", items: "Cybersecurity, CTFs, Data Analytics, Data Science" }
 ];
 
-const TOOLS = [
-  { name: "HTML5 · CSS3", use: "Interface design" },
-  { name: "JavaScript · TypeScript", use: "Frontend + logic" },
-  { name: "Node.js · Express", use: "Backend systems" },
-  { name: "Python · C · C++", use: "Problem solving" },
-  { name: "GitHub · VS Code", use: "Build workflow" },
-  { name: "Excel · PowerPoint · Word", use: "Analysis + communication" }
+const TOOLS: Tool[] = [
+  { name: "VS Code · GitHub", use: "Developer tools" },
+  { name: "AutoCAD", use: "Design tool" },
+  { name: "Excel · PowerPoint · Word", use: "Productivity tools" },
+  { name: "LeetCode · HackerRank", use: "Learning platforms" },
+  { name: "Microsoft Learn · Kaggle", use: "Learning platforms" },
+  { name: "Devfolio · Unstop", use: "Hackathon platforms" }
 ];
 
-const PROJECTS = [
+const PROJECTS: Project[] = [
   {
     num: "001",
     title: "STARK-PROJECT",
     tag: "AI Automation / Voice",
-    desc: "High-performance Node.js-based AI automation framework with a futuristic HUD interface; integrates voice commands with local system control for native app execution, real-time telemetry, and automation.",
-    notes: "This project combines voice-driven control with practical automation and a strong interface layer, making the experience feel both functional and exploratory.",
+    desc: "Node.js-based AI automation framework with a futuristic HUD interface, voice commands integrated with local system control, real-time telemetry, and automation.",
+    notes: "A voice-driven automation framework described as a personal software project.",
     tools: "Node.js, AI automation, voice interfaces",
-    link: "https://github.com/vedantshuklablr-ai/STARK-PROJECT",
-    thumb: PROJECT_THUMB
+    link: "https://github.com/vedantshuklablr-ai/STARK-PROJECT"
   },
   {
     num: "002",
     title: "SKYGUARD AI",
-    tag: "AI / Monitoring",
-    desc: "Next-gen AI-driven air defense system integrating real-time data processing, predictive analytics, and intelligent surveillance for aerial threat detection.",
-    notes: "A concept-focused project that applies predictive thinking to monitoring workflows, with a strong emphasis on data interpretation and operational awareness.",
-    tools: "AI, real-time data, predictive analytics",
+    tag: "AI / Aerospace Concept · Dec 2025 – Present",
+    desc: "Concept-stage AI air-defense project exploring real-time data processing, predictive analytics, and aerial-threat detection. It is not an operational defense system.",
+    notes: "A personal concept and development project; no operational use or validated detection performance is claimed.",
+    tools: "AI, data processing, predictive analytics",
     link: "https://github.com/vedantshuklablr-ai/SKYGUARD",
-    demo: "https://vedantshuklablr-ai.github.io/SKYGUARD/",
-    thumb: PROJECT_THUMB
+    demo: "https://vedantshuklablr-ai.github.io/SKYGUARD/"
   },
   {
     num: "003",
     title: "AI-VOICE-PORTFOLIO",
     tag: "Web / Voice UX",
-    desc: "Personal portfolio with an AI-powered voice chatbot. HTML, CSS, JavaScript.",
-    notes: "Designed to feel interactive and memorable while keeping the technical implementation lightweight and accessible.",
+    desc: "Portfolio integrated with an AI-powered voice chatbot, built with HTML, CSS, and JavaScript.",
+    notes: "The supplied project description identifies this portfolio as including an AI-powered voice chatbot.",
     tools: "HTML, CSS, JavaScript",
-    link: "https://github.com/vedantshuklablr-ai/AI-VOICE-PORTFOLIO",
-    thumb: PROJECT_THUMB
+    link: "https://github.com/vedantshuklablr-ai/AI-VOICE-PORTFOLIO"
   },
   {
     num: "004",
     title: "PERSONAL-PORTFOLIO-WEBSITE",
     tag: "Web / Portfolio",
     desc: "Performance-optimized personal portfolio.",
-    notes: "Built to communicate capability clearly: projects first, skills second, and personal brand without unnecessary clutter.",
+    notes: "A personal web development project.",
     tools: "Web development",
-    link: "https://github.com/vedantshuklablr-ai/PERSONAL-PORTFOLIO-WEBSITE",
-    thumb: PROJECT_THUMB
+    link: "https://github.com/vedantshuklablr-ai/PERSONAL-PORTFOLIO-WEBSITE"
   },
   {
     num: "005",
     title: "MARVEL-STUDIOS-UI",
     tag: "Web / Responsive UI",
-    desc: "Marvel movie pages in chronological order, upcoming releases, modern UI. HTML, CSS, JavaScript.",
-    notes: "A design-and-structure exercise that focuses on clean layouts, flow, and user-friendly content presentation.",
+    desc: "Modern UI featuring Marvel movie pages in chronological order.",
+    notes: "A web interface project focused on presenting movie pages in chronological order.",
     tools: "HTML, CSS, JavaScript",
-    link: "https://github.com/vedantshuklablr-ai/MARVEL-STUDIOS-UI",
-    thumb: PROJECT_THUMB
+    link: "https://github.com/vedantshuklablr-ai/MARVEL-STUDIOS-UI"
   },
   {
     num: "006",
     title: "RoadRakshak",
     tag: "AI / Mapping / Full-stack",
-    desc: "AI-powered road issue reporting platform: Gemini AI, JWT, Cloudinary, MongoDB Atlas, interactive maps.",
-    notes: "This concept emphasizes practical civic utility through AI-assisted reporting and modern full-stack architecture.",
-    tools: "Gemini AI, JWT, Cloudinary, MongoDB Atlas",
-    link: "",
-    thumb: PROJECT_THUMB
+    desc: "AI-powered road-issue reporting platform using Gemini AI, JWT, Cloudinary, MongoDB Atlas, and interactive maps.",
+    notes: "Project details are based on the supplied description; its public repository has not been verified.",
+    tools: "Gemini AI, JWT, Cloudinary, MongoDB Atlas"
+    // TODO: Add a repository link only after its exact public URL is confirmed.
+  },
+  {
+    num: "007",
+    title: "AETHER-01",
+    tag: "Aerospace / Visualization Concept",
+    desc: "AI-assisted aerospace and spacecraft visualization concept. In development; no model, render, preview, or screenshot is available in this repository.",
+    notes: "A personal concept-stage exploration, not professional or operational aerospace work.",
+    tools: "Concept-stage exploration"
   }
 ];
 
-const TRACK = [
-  {
-    role: "Founder & In-Game Leader (IGL)",
-    org: "GOAT Esports Organisation",
-    date: "Apr 2019 – Dec 2025",
-    desc: "Founded and led a competitive Indian eSports organisation managing five active rosters; owned team strategy, roles, communication, roster planning, decision-making under pressure."
-  },
+const TRACK: TrackEntry[] = [
   {
     role: "Founder & Content Creator",
     org: "Java 007 YouTube Channel",
     date: "Apr 2024 – Jan 2026",
-    desc: "eSports/gaming content (Free Fire, BGMI, others). No invented stats."
+    desc: "Produced and published eSports and gaming content, including Free Fire and BGMI."
+  },
+  {
+    role: "Founder & In-Game Leader (IGL)",
+    org: "GOAT Esports Organisation",
+    date: "Apr 2019 – Dec 2025",
+    desc: "Bengaluru, India · Hybrid. Founded and led a competitive Indian eSports organisation managing five active rosters; owned team strategy, player roles, communication, roster planning, and decision-making under pressure."
   }
 ];
 
-const EDUCATION = [
+const EDUCATION: TrackEntry[] = [
   {
     role: "B.Tech, Computer Science Engineering",
     org: "Dayananda Sagar University",
@@ -112,33 +145,40 @@ const EDUCATION = [
   }
 ];
 
-const HACKATHONS = [
+const HACKATHONS: EventCard[] = [
   { name: "HACKANOVA 2026", detail: "NMKRV College · 10-hour hackathon" },
   { name: "BNMIT Hackathon", detail: "BNM Institute of Technology" },
   { name: "TechFix Hackathon", detail: "Hackathon participation" },
   { name: "Virtual CTF – SPARC", detail: "BMS Institute of Technology and Management" }
 ];
 
-const CERTIFICATIONS = [
-  { name: "Introduction to Cybersecurity", issuer: "Cisco" },
-  { name: "Machine Learning for Beginners", issuer: "SimpliLearn" },
-  { name: "Python 101 for Data Science", issuer: "IBM" },
-  { name: "Digital Skills: Artificial Intelligence", issuer: "Accenture" },
-  { name: "Deloitte Australia – Data Analytics Job Simulation", issuer: "Forage" },
-  { name: "Fundamentals of Digital Marketing", issuer: "Google" }
+const CERTIFICATIONS: EventCard[] = [
+  { name: "Introduction to Cybersecurity", detail: "Cisco" },
+  { name: "Machine Learning for Beginners", detail: "SimpliLearn" },
+  { name: "Python 101 for Data Science", detail: "IBM" },
+  { name: "Digital Skills: Artificial Intelligence", detail: "Accenture" },
+  { name: "Deloitte Australia – Data Analytics Job Simulation", detail: "Forage" },
+  { name: "Fundamentals of Digital Marketing", detail: "Google" }
 ];
 
-const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
+function getElement<T extends HTMLElement>(id: string): T {
+  const element = document.getElementById(id);
+  if (!element) throw new Error(`Required page element #${id} is missing.`);
+  return element as T;
+}
+
+const HTML_ESCAPES: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;',
   '"': '&quot;',
   "'": '&#39;'
-})[character]);
+};
+
+const escapeHtml = (value: string): string => String(value).replace(/[&<>"']/g, character => HTML_ESCAPES[character]);
 
 function renderSkills() {
-  const el = document.getElementById('skillRows');
-  if (!el) return;
+  const el = getElement<HTMLDivElement>('skillRows');
   el.innerHTML = SKILLS.map(skill => `
     <div class="skill-row tilt-card">
       <div class="cat">${escapeHtml(skill.cat)}</div>
@@ -147,8 +187,7 @@ function renderSkills() {
 }
 
 function renderTools() {
-  const el = document.getElementById('toolGrid');
-  if (!el) return;
+  const el = getElement<HTMLDivElement>('toolGrid');
   el.innerHTML = TOOLS.map(tool => `
     <article class="tool-card tilt-card">
       <span class="tool-use">${escapeHtml(tool.use)}</span>
@@ -156,7 +195,7 @@ function renderTools() {
     </article>`).join('');
 }
 
-function safeProjectUrl(value, kind) {
+function safeProjectUrl(value: string | undefined, kind: 'github' | 'demo'): string {
   if (!value) return '';
   try {
     const url = new URL(value);
@@ -170,18 +209,14 @@ function safeProjectUrl(value, kind) {
 }
 
 function renderProjects() {
-  const el = document.getElementById('projList');
-  if (!el) return;
+  const el = getElement<HTMLDivElement>('projList');
   el.innerHTML = PROJECTS.map((project, index) => {
     const repoUrl = safeProjectUrl(project.link, 'github');
     const demoUrl = safeProjectUrl(project.demo, 'demo');
     return `
       <article class="proj-card tilt-card">
-        <div class="proj-thumb">
-          <span class="proj-num">${escapeHtml(project.num)}</span>
-          <img src="${escapeHtml(project.thumb)}" alt="${escapeHtml(project.title)} project thumbnail" loading="lazy" width="1280" height="720">
-        </div>
         <div class="proj-body">
+          <span class="proj-num">${escapeHtml(project.num)}</span>
           <span class="proj-tag">${escapeHtml(project.tag)}</span>
           <h3 class="proj-title">${escapeHtml(project.title)}</h3>
           <p class="proj-desc">${escapeHtml(project.desc)}</p>
@@ -195,9 +230,8 @@ function renderProjects() {
   }).join('');
 }
 
-function renderEntries(targetId, entries) {
-  const el = document.getElementById(targetId);
-  if (!el) return;
+function renderEntries(targetId: string, entries: readonly TrackEntry[]) {
+  const el = getElement<HTMLDivElement>(targetId);
   el.innerHTML = entries.map(entry => `
     <div class="track-item">
       <div class="track-top">
@@ -211,13 +245,12 @@ function renderEntries(targetId, entries) {
     </div>`).join('');
 }
 
-function renderCards(targetId, entries, titleKey, subtitleKey) {
-  const el = document.getElementById(targetId);
-  if (!el) return;
+function renderCards(targetId: string, entries: readonly EventCard[]) {
+  const el = getElement<HTMLDivElement>(targetId);
   el.innerHTML = entries.map(entry => `
     <article class="credential-card">
-      <h3>${escapeHtml(entry[titleKey])}</h3>
-      <p>${escapeHtml(entry[subtitleKey])}</p>
+      <h3>${escapeHtml(entry.name)}</h3>
+      <p>${escapeHtml(entry.detail)}</p>
     </article>`).join('');
 }
 
@@ -226,12 +259,12 @@ renderTools();
 renderProjects();
 renderEntries('trackList', TRACK);
 renderEntries('educationList', EDUCATION);
-renderCards('hackathonList', HACKATHONS, 'name', 'detail');
-renderCards('certificationList', CERTIFICATIONS, 'name', 'issuer');
+renderCards('hackathonList', HACKATHONS);
+renderCards('certificationList', CERTIFICATIONS);
 
 function initTiltCards() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.querySelectorAll('.tilt-card').forEach(card => {
+  document.querySelectorAll<HTMLElement>('.tilt-card').forEach(card => {
     const glare = document.createElement('span');
     glare.className = 'card-glare';
     card.appendChild(glare);
@@ -256,7 +289,7 @@ function initTiltCards() {
 
 function initParallax() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const items = document.querySelectorAll('[data-depth]');
+  const items = document.querySelectorAll<HTMLElement>('[data-depth]');
   let queued = false;
   const update = () => {
     queued = false;
@@ -280,34 +313,59 @@ function initParallax() {
 initTiltCards();
 initParallax();
 
-document.getElementById('year').textContent = new Date().getFullYear();
+getElement('year').textContent = new Date().getFullYear().toString();
 
-const progress = document.getElementById('progress');
+const progress = getElement<HTMLDivElement>('progress');
 window.addEventListener('scroll', () => {
   const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   progress.style.width = `${max > 0 ? (document.documentElement.scrollTop / max) * 100 : 0}%`;
 }, { passive: true });
 
-const menuBtn = document.getElementById('menuBtn');
-const navLinks = document.getElementById('navLinks');
+const menuBtn = getElement<HTMLButtonElement>('menuBtn');
+const navLinks = getElement<HTMLElement>('navLinks');
 
-function setMenuOpen(open) {
+function setMenuOpen(open: boolean) {
   navLinks.classList.toggle('open', open);
   menuBtn.setAttribute('aria-expanded', String(open));
-  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  menuBtn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
 }
 
 menuBtn.addEventListener('click', () => setMenuOpen(!navLinks.classList.contains('open')));
-navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+navLinks.querySelectorAll<HTMLAnchorElement>('a').forEach(link => link.addEventListener('click', () => {
+  setMenuOpen(false);
+  const target = document.querySelector<HTMLElement>(link.hash);
+  if (target) {
+    target.tabIndex = -1;
+    target.focus({ preventScroll: true });
+  }
+}));
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && navLinks.classList.contains('open')) {
     setMenuOpen(false);
     menuBtn.focus();
+    return;
+  }
+  if (event.key === 'Tab' && navLinks.classList.contains('open') && matchMedia('(max-width: 1120px)').matches) {
+    const links = [...navLinks.querySelectorAll<HTMLAnchorElement>('a[href]')];
+    const first = links[0];
+    const last = links[links.length - 1];
+    if (document.activeElement === menuBtn) {
+      event.preventDefault();
+      (event.shiftKey ? last : first).focus();
+    } else if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      menuBtn.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      menuBtn.focus();
+    }
   }
 });
 
-const navAnchors = [...navLinks.querySelectorAll('a[href^="#"]')];
-const navSections = navAnchors.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+const navAnchors = [...navLinks.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')];
+const navSections = navAnchors
+  .map(link => document.getElementById(link.hash.slice(1)))
+  .filter((section): section is HTMLElement => section instanceof HTMLElement);
 if ('IntersectionObserver' in window && navSections.length) {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -318,7 +376,7 @@ if ('IntersectionObserver' in window && navSections.length) {
   navSections.forEach(section => observer.observe(section));
 }
 
-const backTop = document.getElementById('backTop');
+const backTop = getElement<HTMLButtonElement>('backTop');
 backTop.hidden = true;
 window.addEventListener('scroll', () => {
   backTop.hidden = window.scrollY < 700;
@@ -327,29 +385,30 @@ backTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 });
 
-const toast = document.getElementById('toast');
-function showToast(message) {
+const toast = getElement<HTMLDivElement>('toast');
+let toastTimeout: number | undefined;
+function showToast(message: string) {
   toast.textContent = message;
   toast.classList.add('show');
-  clearTimeout(showToast.timeout);
-  showToast.timeout = setTimeout(() => toast.classList.remove('show'), 2600);
+  if (toastTimeout !== undefined) clearTimeout(toastTimeout);
+  toastTimeout = window.setTimeout(() => toast.classList.remove('show'), 2600);
 }
 
-const caseBackdrop = document.getElementById('caseBackdrop');
-const caseDialog = document.getElementById('caseDialog');
-const caseClose = document.getElementById('caseClose');
-let lastFocus = null;
+const caseBackdrop = getElement<HTMLDivElement>('caseBackdrop');
+const caseDialog = getElement<HTMLDivElement>('caseDialog');
+const caseClose = getElement<HTMLButtonElement>('caseClose');
+let lastFocus: HTMLElement | null = null;
 
-function openCase(index) {
+function openCase(index: number) {
   const project = PROJECTS[index];
   if (!project) return;
-  lastFocus = document.activeElement;
-  document.getElementById('caseMeta').textContent = `${project.num} · ${project.tag} · ${project.tools}`;
-  document.getElementById('caseTitle').textContent = project.title;
-  document.getElementById('caseDesc').textContent = project.desc;
-  document.getElementById('caseNotes').textContent = project.notes;
+  lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  getElement('caseMeta').textContent = `${project.num} · ${project.tag} · ${project.tools}`;
+  getElement('caseTitle').textContent = project.title;
+  getElement('caseDesc').textContent = project.desc;
+  getElement('caseNotes').textContent = project.notes;
   caseBackdrop.hidden = false;
-  caseDialog.focus();
+  caseClose.focus();
 }
 
 function closeCase() {
@@ -358,15 +417,25 @@ function closeCase() {
   if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
 }
 
-document.getElementById('projList').addEventListener('click', event => {
-  const button = event.target.closest('[data-project]');
+getElement<HTMLDivElement>('projList').addEventListener('click', event => {
+  if (!(event.target instanceof Element)) return;
+  const button = event.target.closest<HTMLElement>('[data-project]');
   if (button) openCase(Number(button.dataset.project));
 });
 caseClose.addEventListener('click', closeCase);
 caseDialog.addEventListener('keydown', event => {
   if (event.key === 'Tab') {
-    event.preventDefault();
-    caseClose.focus();
+    const focusable = [...caseDialog.querySelectorAll<HTMLElement>('a[href], button:not(:disabled), [tabindex]:not([tabindex="-1"])')];
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 });
 caseBackdrop.addEventListener('click', event => {
@@ -376,7 +445,7 @@ document.addEventListener('keydown', event => {
   if (event.key === 'Escape') closeCase();
 });
 
-const contactForm = document.getElementById('contactForm');
+const contactForm = getElement<HTMLFormElement>('contactForm');
 contactForm.addEventListener('submit', event => {
   event.preventDefault();
   if (!contactForm.reportValidity()) return;
@@ -397,23 +466,25 @@ contactForm.addEventListener('submit', event => {
 });
 
 async function initResumeCard() {
-  const qrContainer = document.getElementById('resumeQr');
-  const placeholder = document.getElementById('resumeQrPlaceholder');
-  const status = document.getElementById('resumeStatus');
-  const destination = document.getElementById('resumeDestination');
-  const download = document.getElementById('downloadResume');
-  const open = document.getElementById('openResume');
-  const copy = document.getElementById('copyResumeLink');
-  const fallbackInput = document.getElementById('resumeLinkFallback');
-  const heroDownload = document.getElementById('heroResumeDownload');
+  const qrContainer = getElement<HTMLDivElement>('resumeQr');
+  const placeholder = getElement<HTMLParagraphElement>('resumeQrPlaceholder');
+  const status = getElement<HTMLSpanElement>('resumeStatus');
+  const destination = getElement<HTMLAnchorElement>('resumeDestination');
+  const download = getElement<HTMLAnchorElement>('downloadResume');
+  const open = getElement<HTMLAnchorElement>('openResume');
+  const copy = getElement<HTMLButtonElement>('copyResumeLink');
+  const downloadQr = getElement<HTMLButtonElement>('downloadResumeQr');
+  const fallbackInput = getElement<HTMLInputElement>('resumeLinkFallback');
+  const heroDownload = getElement<HTMLAnchorElement>('heroResumeDownload');
   let verifiedResumeUrl = '';
+  let qrSvg = '';
 
-  const setStatus = (message, state = 'error') => {
+  const setStatus = (message: string, state: 'ready' | 'pending' | 'error' = 'error') => {
     status.textContent = message;
     status.dataset.state = state;
   };
 
-  const enableResumeLinks = url => {
+  const enableResumeLinks = (url: URL) => {
     [download, open, heroDownload].forEach(link => {
       link.href = url.href;
       link.removeAttribute('aria-disabled');
@@ -462,6 +533,7 @@ async function initResumeCard() {
     const code = window.qrcode(0, 'M');
     code.addData(resumeUrl.href);
     code.make();
+    qrSvg = code.createSvgTag(8, 4, 'QR code linking to Vedant Shukla’s résumé PDF');
 
     const image = new Image();
     image.alt = 'QR code linking to Vedant Shukla’s résumé PDF';
@@ -472,6 +544,7 @@ async function initResumeCard() {
         return;
       }
       placeholder.hidden = true;
+      downloadQr.disabled = false;
       setStatus('Ready', 'ready');
     };
     image.onerror = () => {
@@ -500,6 +573,24 @@ async function initResumeCard() {
       showToast('Clipboard unavailable. The résumé link is selected for you to copy.');
     }
   });
+
+  downloadQr.addEventListener('click', () => {
+    if (!qrSvg) return;
+    const imageUrl = URL.createObjectURL(new Blob([qrSvg], { type: 'image/svg+xml;charset=utf-8' }));
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = 'Vedant-Shukla-Resume-QR.svg';
+    link.click();
+    window.setTimeout(() => URL.revokeObjectURL(imageUrl), 1000);
+  });
 }
 
 initResumeCard();
+
+if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(error => {
+      console.warn('Offline support could not be enabled; the portfolio remains available online.', error);
+    });
+  });
+}
