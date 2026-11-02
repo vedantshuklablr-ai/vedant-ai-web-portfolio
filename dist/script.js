@@ -542,25 +542,41 @@ function initHeroIntroVideo() {
     const hero = getElement('hero');
     const video = getElement('heroIntroVideo');
     const poster = getElement('heroIntroPoster');
+    const playButton = getElement('heroIntroPlay');
+    const playLabel = getElement('heroIntroPlayLabel');
     const card = video.closest('.hero-video-card');
     if (!card)
         throw new Error('The hero introduction video card is missing.');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let heroIsVisible = false;
     let videoSourceLoaded = false;
+    let userInitiated = false;
     const shouldUsePoster = () => {
         const connection = navigator.connection;
-        return reducedMotion.matches
-            || window.matchMedia('(max-width: 860px)').matches
+        return window.matchMedia('(max-width: 860px)').matches
             || connection?.saveData === true
             || connection?.effectiveType === 'slow-2g'
             || connection?.effectiveType === '2g'
             || connection?.effectiveType === '3g';
     };
-    const startVideo = () => {
-        if (!heroIsVisible || shouldUsePoster())
+    const setPlayButton = (visible, label = 'Play intro video') => {
+        playButton.hidden = !visible;
+        playButton.disabled = false;
+        playLabel.textContent = label;
+        playButton.setAttribute('aria-label', label);
+    };
+    const startVideo = (fromUser = false) => {
+        if (!heroIsVisible || reducedMotion.matches || (!fromUser && shouldUsePoster()))
             return;
-        if (!videoSourceLoaded) {
+        if (fromUser) {
+            userInitiated = true;
+            video.controls = true;
+            video.classList.add('is-user-playing');
+            playButton.disabled = true;
+            playLabel.textContent = 'Loading intro video…';
+            playButton.setAttribute('aria-label', 'Loading intro video');
+        }
+        if (!videoSourceLoaded || (fromUser && video.error)) {
             const source = video.dataset.src;
             if (!source)
                 throw new Error('The hero introduction video source is missing.');
@@ -569,21 +585,43 @@ function initHeroIntroVideo() {
             videoSourceLoaded = true;
         }
         void video.play().catch(() => {
-            // Keep the poster visible if the browser blocks autoplay.
+            if (reducedMotion.matches)
+                return;
+            setPlayButton(true, 'Video did not start. Try again.');
         });
     };
     const updatePlaybackPreference = () => {
-        if (shouldUsePoster()) {
+        if (reducedMotion.matches) {
+            video.pause();
+            video.classList.remove('is-user-playing');
+            card.classList.remove('is-playing');
+            poster.hidden = false;
+            setPlayButton(false);
+            return;
+        }
+        if (shouldUsePoster() && !userInitiated) {
             video.pause();
             card.classList.remove('is-playing');
             poster.hidden = false;
+            setPlayButton(true);
             return;
         }
+        setPlayButton(!videoSourceLoaded || video.paused);
         startVideo();
     };
     video.addEventListener('playing', () => {
         poster.hidden = true;
         card.classList.add('is-playing');
+        setPlayButton(false);
+    });
+    video.addEventListener('error', () => {
+        setPlayButton(true, 'Video could not load. Try again.');
+    });
+    playButton.addEventListener('click', () => {
+        if (reducedMotion.matches)
+            return;
+        heroIsVisible = true;
+        startVideo(true);
     });
     reducedMotion.addEventListener('change', updatePlaybackPreference);
     window.addEventListener('resize', updatePlaybackPreference, { passive: true });
@@ -597,6 +635,10 @@ function initHeroIntroVideo() {
         });
         observer.observe(hero);
     }
+    else {
+        heroIsVisible = true;
+    }
+    updatePlaybackPreference();
 }
 initHeroIntroVideo();
 initResumeCard();

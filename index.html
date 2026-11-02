@@ -118,7 +118,11 @@
       </div>
       <figure class="hero-visual hero-video-card reveal reveal-d2" aria-label="Short introduction video">
         <img class="hero-video-poster" id="heroIntroPoster" src="assets/video/intro-clip-poster.jpg" alt="" width="1920" height="1080" fetchpriority="high">
-        <video class="hero-video" id="heroIntroVideo" muted autoplay loop playsinline preload="none" poster="assets/video/intro-clip-poster.jpg" data-src="assets/video/intro-clip.mp4" aria-hidden="true"></video>
+        <video class="hero-video" id="heroIntroVideo" muted autoplay loop playsinline preload="none" poster="assets/video/intro-clip-poster.jpg" data-src="assets/video/intro-clip.mp4" aria-label="Introduction video"></video>
+        <button class="hero-video-play" id="heroIntroPlay" type="button" aria-label="Play intro video" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+          <span id="heroIntroPlayLabel">Play intro video</span>
+        </button>
       </figure>
     </div>
     <div class="wrap">
