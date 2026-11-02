@@ -32,7 +32,7 @@ type Project = {
   link?: string;
   demo?: string;
 };
-type TrackEntry = { role: string; org: string; date: string; desc: string; link?: string };
+type TrackEntry = { role: string; org: string; date: string; desc: string; link?: string; linkLabel?: string };
 type EventCard = { name: string; detail: string };
 
 const CONTACT_EMAIL = "vedantshuklablr@gmail.com";
@@ -134,7 +134,9 @@ const TRACK: TrackEntry[] = [
     role: "Founder & In-Game Leader (IGL)",
     org: "GOAT Esports Organisation",
     date: "Apr 2019 – Dec 2025",
-    desc: "Bengaluru, India · Hybrid. Founded and led a competitive Indian eSports organisation managing five active rosters; owned team strategy, player roles, communication, roster planning, and decision-making under pressure."
+    desc: "Bengaluru, India · Hybrid. Founded and led a competitive Indian eSports organisation managing five active rosters; owned team strategy, player roles, communication, roster planning, and decision-making under pressure.",
+    link: "https://goat-esports.vercel.app/",
+    linkLabel: "GOAT ESPORTS website"
   }
 ];
 
@@ -245,7 +247,7 @@ function renderEntries(targetId: string, entries: readonly TrackEntry[]) {
       <div class="track-top">
         <div>
           <div class="track-role">${escapeHtml(entry.role)}</div>
-          <div class="track-org">${escapeHtml(entry.org)}${entry.link ? ` · <a href="${escapeHtml(entry.link)}" target="_blank" rel="noopener noreferrer">YouTube channel ↗</a>` : ''}</div>
+          <div class="track-org">${escapeHtml(entry.org)}${entry.link ? ` · <a href="${escapeHtml(entry.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(entry.linkLabel ?? 'YouTube channel')} ↗</a>` : ''}</div>
         </div>
         <div class="track-date">${escapeHtml(entry.date)}</div>
       </div>
