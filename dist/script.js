@@ -1,5 +1,15 @@
 const CONTACT_EMAIL = "vedantshuklablr@gmail.com";
 const RESUME_PATH = "assets/resume/Vedant-Shukla-Resume.pdf";
+const SOCIAL_LINKS = [
+    { name: 'X', url: 'https://x.com/vedantshukla07', icon: 'x' },
+    { name: 'LinkedIn', url: 'https://linkedin.com/in/vedant-shukla-7735a7313/', icon: 'linkedin' },
+    { name: 'GitHub', url: 'https://github.com/vedantshuklablr-ai', icon: 'github' }
+];
+const SOCIAL_ICON_PATHS = {
+    x: 'M18.901 1.153h3.68L14.54 10.02l9.45 12.827h-7.406l-5.8-7.584-6.64 7.584H.46l8.6-9.83L0 1.154h7.594l5.243 6.932zm-1.293 19.43h2.039L6.486 3.278H4.298z',
+    linkedin: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.35V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.119 20.452H3.555V9h3.564z',
+    github: 'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.043-1.61-4.043-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.304-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 6.006 0c2.29-1.552 3.297-1.23 3.297-1.23.655 1.652.243 2.873.12 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.805 5.623-5.475 5.921.43.372.815 1.103.815 2.222 0 1.605-.015 2.898-.015 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.597 24 12.297c0-6.627-5.373-12-12-12'
+};
 const SKILLS = [
     { cat: "Languages", items: "C, C++, Java, Python, JavaScript, TypeScript" },
     { cat: "Web", items: "HTML5, CSS3, JavaScript, Node.js, Express" },
@@ -148,6 +158,18 @@ function renderSkills() {
       <div class="items">${escapeHtml(skill.items)}</div>
     </div>`).join('');
 }
+function renderSocialLinks() {
+    const markup = SOCIAL_LINKS.map(({ name, url, icon }) => `
+    <a class="social-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer"
+       aria-label="${escapeHtml(`${name} profile`)}" title="${escapeHtml(name)}" data-tooltip="${escapeHtml(name)}">
+      <svg class="social-icon social-icon-${icon}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="${SOCIAL_ICON_PATHS[icon]}"></path>
+      </svg>
+    </a>`).join('');
+    ['heroSocialLinks', 'contactSocialLinks', 'footerSocialLinks'].forEach(id => {
+        getElement(id).innerHTML = markup;
+    });
+}
 function renderTools() {
     const el = getElement('toolGrid');
     el.innerHTML = TOOLS.map(tool => `
@@ -217,6 +239,7 @@ function renderCards(targetId, entries) {
     </article>`).join('');
 }
 renderSkills();
+renderSocialLinks();
 renderTools();
 renderProjects();
 renderEntries('trackList', TRACK);

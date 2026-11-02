@@ -181,10 +181,29 @@ button.btn{appearance:none;}
 .hero-video-play:disabled{cursor:wait;}
 .hero-video-play[hidden]{display:none;}
 .hero-video-play svg{width:20px;height:20px;fill:currentColor;}
-.hero-social{display:flex;flex-wrap:wrap;gap:var(--sp-5);margin-top:var(--sp-5);}
-.hero-social a{display:inline-flex;align-items:center;gap:var(--sp-2);min-height:44px;color:var(--muted);font-size:14px;text-decoration:none;}
-.hero-social a:hover{color:var(--accent-2);}
-.hero-social svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.social-links{display:flex;align-items:center;gap:10px;}
+.hero-social{margin-top:var(--sp-5);}
+.social-link{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border:1px solid var(--line);border-radius:50%;
+  color:var(--muted);background:rgba(255,255,255,.025);
+  text-decoration:none;transition:color .18s ease,border-color .18s ease,background-color .18s ease,transform .18s ease;
+}
+.social-link:hover{color:var(--accent-2);border-color:var(--accent-2);background:rgba(102,217,255,.08);transform:translateY(-3px);}
+.social-link:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;color:var(--accent-2);}
+.social-link::after{
+  content:attr(data-tooltip);position:absolute;left:50%;bottom:calc(100% + 8px);
+  padding:5px 8px;border:1px solid var(--line-strong);background:var(--surface);
+  color:var(--ink);font:11px var(--font-mono);white-space:nowrap;pointer-events:none;
+  opacity:0;transform:translate(-50%,4px);transition:opacity .15s ease,transform .15s ease;
+}
+.social-link:hover::after,.social-link:focus-visible::after{opacity:1;transform:translate(-50%,0);}
+.social-icon{display:block;width:20px;height:20px;fill:currentColor;}
+.social-icon-x{width:19px;height:19px;}
+.social-icon-linkedin{width:21px;height:21px;}
+.contact-social-links{margin-top:var(--sp-4);}
+.footer-social-links{flex-shrink:0;}
+@media (prefers-reduced-motion:reduce){.social-link,.social-link::after{transition:none;}}
 @media (max-width:620px){
   .ruler-labels{flex-direction:column;gap:4px;text-align:center;}
 }

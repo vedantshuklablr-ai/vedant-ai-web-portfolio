@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vedant-portfolio-v9';
+const CACHE_NAME = 'vedant-portfolio-v10';
 const CORE_ASSETS = [
   './',
   './index.html',
