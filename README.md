@@ -83,4 +83,4 @@ The résumé is a public static file in this repository. Only publish or deploy 
 
 ## Deployment
 
-The site is static. For Vercel, use the repository root as the project root, choose the **Other** framework preset, and leave the build command empty. Deploy only after the committed `dist/script.js` is up to date. Verify the homepage and `assets/resume/Vedant-Shukla-Resume.pdf` on the production URL before sharing the generated QR code.
+The site is static. Vercel serves the repository root directly; `vercel.json` skips deployment-time dependency installation and compilation because the committed `dist/script.js` is the production asset. Run `npm run build` locally after TypeScript changes and commit the updated output before deploying. Verify the homepage and `assets/resume/Vedant-Shukla-Resume.pdf` on the production URL before sharing the generated QR code.
