@@ -32,7 +32,7 @@ type Project = {
   link?: string;
   demo?: string;
 };
-type TrackEntry = { role: string; org: string; date: string; desc: string };
+type TrackEntry = { role: string; org: string; date: string; desc: string; link?: string };
 type EventCard = { name: string; detail: string };
 
 const CONTACT_EMAIL = "vedantshuklablr@gmail.com";
@@ -127,7 +127,8 @@ const TRACK: TrackEntry[] = [
     role: "Founder & Content Creator",
     org: "Java 007 YouTube Channel",
     date: "Apr 2024 – Jan 2026",
-    desc: "Produced and published eSports and gaming content, including Free Fire and BGMI."
+    desc: "Produced and published eSports and gaming content, including Free Fire and BGMI.",
+    link: "https://youtube.com/@vedant_shukla007?si=Y3tyqGtemUBXXCxx"
   },
   {
     role: "Founder & In-Game Leader (IGL)",
@@ -244,7 +245,7 @@ function renderEntries(targetId: string, entries: readonly TrackEntry[]) {
       <div class="track-top">
         <div>
           <div class="track-role">${escapeHtml(entry.role)}</div>
-          <div class="track-org">${escapeHtml(entry.org)}</div>
+          <div class="track-org">${escapeHtml(entry.org)}${entry.link ? ` · <a href="${escapeHtml(entry.link)}" target="_blank" rel="noopener noreferrer">YouTube channel ↗</a>` : ''}</div>
         </div>
         <div class="track-date">${escapeHtml(entry.date)}</div>
       </div>

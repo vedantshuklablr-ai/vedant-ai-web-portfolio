@@ -306,6 +306,8 @@ h2{font-size:clamp(28px,4vw,34px);margin-bottom:var(--sp-6);}
 .track-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--sp-2);}
 .track-role{font-family:var(--font-display);font-weight:700;font-size:19px;}
 .track-org{color:var(--accent-2);font-size:14.5px;}
+.track-org a{display:inline-flex;align-items:center;min-height:44px;color:var(--accent-2);text-underline-offset:3px;}
+.track-org a:hover{color:var(--ink);}
 .track-date{font-family:var(--font-mono);font-size:13px;color:var(--muted-2);white-space:nowrap;}
 .track-desc{color:var(--muted);font-size:15px;margin-top:var(--sp-2);max-width:60ch;}
 
