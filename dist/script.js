@@ -19,12 +19,9 @@ const SKILLS = [
     { cat: "Cybersecurity / Analytics", items: "Cybersecurity, CTFs, Data Analytics, Data Science" }
 ];
 const TOOLS = [
-    { name: "VS Code · GitHub", use: "Developer tools" },
+    { name: "VS Code • GitHub", use: "Developer tools" },
     { name: "AutoCAD", use: "Design tool" },
-    { name: "Excel · PowerPoint · Word", use: "Productivity tools" },
-    { name: "LeetCode · HackerRank", use: "Learning platforms" },
-    { name: "Microsoft Learn · Kaggle", use: "Learning platforms" },
-    { name: "Devfolio · Unstop", use: "Hackathon platforms" }
+    { name: "Excel • PowerPoint • Word", use: "Productivity tools" }
 ];
 const PROJECTS = [
     {
