@@ -139,7 +139,7 @@ const VENTURES = [
         icon: "store",
         description: "Developing an e-commerce business concept focused on product research, digital storefront development, supplier exploration, and understanding the Indian e-commerce market.",
         status: "UNDER CONSTRUCTION — IN DEVELOPMENT",
-        businessModel: "Dropshipping + Affiliate Marketing",
+        businessModel: "Dropshipping / e-commerce",
         focusAreas: ["Indian e-commerce", "Product research", "Supplier research", "Store development", "Digital storefront design", "Customer experience", "Business operations", "Brand building"]
     },
     {
